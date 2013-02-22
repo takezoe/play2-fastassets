@@ -4,9 +4,9 @@ play2-fastassets
 Accelerates Play2 development mode by leveraging browser cache. 
 
 Replace the routing to ```controllers.Assets.at``` by ```jp.sf.amateras.play2.fastassets.FastAssets.get```.
-This method returns a response which has a header: ```Cache: private, max-age=3600```.
+This method returns a response which has a header: ```Cache-Control: private, max-age=3600```.
 
-```
+```shell
 #GET /assets/*file controllers.Assets.at(path="/public", file)
 GET /assets/*file jp.sf.amateras.play2.fastassets.FastAssets.get(path="/public", file)
 ```
