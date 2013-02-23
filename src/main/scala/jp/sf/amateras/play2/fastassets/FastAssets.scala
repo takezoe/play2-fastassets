@@ -34,6 +34,10 @@ import java.text.SimpleDateFormat
  */
 object FastAssets extends Controller {
 
+  private lazy val urlPath = play.Play.application().configuration().getString("fastassets.urlPath")
+    
+  private lazy val realPath = play.Play.application().configuration().getString("fastassets.readPath")
+  
   private val timeZoneCode = "GMT"
 
   //Dateformatter is immutable and threadsafe
@@ -52,12 +56,12 @@ object FastAssets extends Controller {
    */
   def at(file: String): String = {
     Play.mode match {
-      case Mode.Prod => "/assets/" + file
+      case Mode.Prod => urlPath + "/" + file
       case _ => {
-        val resourceName = Option("/public/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
+        val resourceName = Option(realPath + "/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
         Play.resource(resourceName) match {
-          case Some(x) => "/assets/" + file.replaceFirst("\\.([^.]+)$", "_" + lastModifiedForTimestamp(x).get + ".$1")
-          case None    => "/assets/" + file
+          case Some(x) => urlPath + "/" + file.replaceFirst("\\.([^.]+)$", "_" + lastModifiedForTimestamp(x).get + ".$1")
+          case None    => urlPath + "/" + file
         }
       }
     }
@@ -94,7 +98,7 @@ object FastAssets extends Controller {
    * @param path the root folder for searching the static resource files, such as `"/public"`
    * @param file the file part extracted from the URL
    */
-  def get(path: String, file: String): Action[AnyContent] = Action { request =>
+  def get(file: String): Action[AnyContent] = Action { request =>
     // -- LastModified handling
     def parseDate(date: String): Option[java.util.Date] = try {
       //jodatime does not parse timezones, so we handle that manually
@@ -107,9 +111,9 @@ object FastAssets extends Controller {
     // remove timestamp
     val realfile = file.replaceFirst("""_[0-9]{17}\.""", ".");
 
-    val resourceName = Option(path + "/" + realfile).map(name => if (name.startsWith("/")) name else ("/" + name)).get
+    val resourceName = Option(realPath + "/" + realfile).map(name => if (name.startsWith("/")) name else ("/" + name)).get
 
-    if (new File(resourceName).isDirectory || !new File(resourceName).getCanonicalPath.startsWith(new File(path).getCanonicalPath)) {
+    if (new File(resourceName).isDirectory || !new File(resourceName).getCanonicalPath.startsWith(new File(realPath).getCanonicalPath)) {
       NotFound
     } else {
 

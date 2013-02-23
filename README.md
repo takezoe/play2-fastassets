@@ -8,13 +8,20 @@ This method returns a response which has a header: ```Cache-Control: private, ma
 
 ```shell
 #GET /assets/*file controllers.Assets.at(path="/public", file)
-GET /assets/*file jp.sf.amateras.play2.fastassets.FastAssets.get(path="/public", file)
+GET /assets/*file jp.sf.amateras.play2.fastassets.FastAssets.get(file)
+```
+
+Add following configurations into ```conf/application.conf```.
+
+```shell
+fastassets.urlPath=/assets
+fastassets.realPath=/public
 ```
 
 And use ```FastAssets.at``` instead of ```routes.Assets.at``` in HTML templates.
 This method appends a last modified timestamp to the filename and your browser cache it.
-When you update the file, this timestamp is also updated. So the browser retrieve 
-a new file from the server instead of the cached contents.
+When you update the file, this timestamp is also updated. 
+So the browser retrieves a new file from the server instead of the cached contents.
 
 ```html
 @(title: String)(content: Html)
