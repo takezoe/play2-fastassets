@@ -36,7 +36,6 @@ So the browser retrieves a new file from the server instead of the cached conten
   </head>
   <body>
     @content
-    <img src="@FastAssets.at("images/favicon.png")"/>
   </body>
 </html>
 
