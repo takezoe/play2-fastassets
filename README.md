@@ -50,6 +50,6 @@ So the browser retrieves a new file from the server instead of the cached conten
 
 Release Notes
 --------
-### 0.0.1 - Initial Release
+### 0.0.1 - 25 Feb 2013
 
 * This is an initial release of play2-fastassets. This version works for play-2.0.1.
