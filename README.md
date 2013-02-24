@@ -3,7 +3,7 @@ play2-fastassets
 
 Accelerates Play2 development mode by leveraging browser cache. 
 
-At first, add the following dependency into your Build.scala:
+At first, add the following dependency into your ```project/Build.scala```:
 
 ```scala
 resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
@@ -11,7 +11,7 @@ resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
 libraryDependencies += "jp.sf.amateras.play2.fastassets" %% "play2-fastassets" % "0.0.1"
 ```
 
-Replace the routing to ```controllers.Assets.at``` by ```jp.sf.amateras.play2.fastassets.FastAssets.get```.
+Replace the routing to ```controllers.Assets.at``` by ```jp.sf.amateras.play2.fastassets.FastAssets.get``` in ```conf/routes```.
 This method returns a response which has a header: ```Cache-Control: private, max-age=3600```.
 
 ```shell
