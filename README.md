@@ -3,6 +3,14 @@ play2-fastassets
 
 Accelerates Play2 development mode by leveraging browser cache. 
 
+At first, add the following dependency into your Build.scala:
+
+```scala
+resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
+
+libraryDependencies += "jp.sf.amateras.play2.fastassets" %% "play2-fastassets" % "0.0.1"
+```
+
 Replace the routing to ```controllers.Assets.at``` by ```jp.sf.amateras.play2.fastassets.FastAssets.get```.
 This method returns a response which has a header: ```Cache-Control: private, max-age=3600```.
 
@@ -11,14 +19,14 @@ This method returns a response which has a header: ```Cache-Control: private, ma
 GET /assets/*file jp.sf.amateras.play2.fastassets.FastAssets.get(file)
 ```
 
-Add following configurations into ```conf/application.conf```.
+And add following configurations into ```conf/application.conf```.
 
 ```shell
 fastassets.urlPath=/assets
 fastassets.realPath=/public
 ```
 
-And use ```FastAssets.at``` instead of ```routes.Assets.at``` in HTML templates.
+Use ```FastAssets.at``` instead of ```routes.Assets.at``` in HTML templates.
 This method appends a last modified timestamp to the filename and your browser cache it.
 When you update the file, this timestamp is also updated. 
 So the browser retrieves a new file from the server instead of the cached contents.
@@ -38,5 +46,10 @@ So the browser retrieves a new file from the server instead of the cached conten
     @content
   </body>
 </html>
-
 ```
+
+Release Notes
+--------
+### 0.0.1 - Initial Release
+
+* This is an initial release of play2-fastassets. This version works for play-2.0.1.
