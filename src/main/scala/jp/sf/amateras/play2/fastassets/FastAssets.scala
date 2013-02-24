@@ -36,7 +36,7 @@ object FastAssets extends Controller {
 
   private lazy val urlPath = play.Play.application().configuration().getString("fastassets.urlPath")
     
-  private lazy val realPath = play.Play.application().configuration().getString("fastassets.readPath")
+  private lazy val realPath = play.Play.application().configuration().getString("fastassets.realPath")
   
   private val timeZoneCode = "GMT"
 
