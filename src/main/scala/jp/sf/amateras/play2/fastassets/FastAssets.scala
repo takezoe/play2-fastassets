@@ -55,15 +55,19 @@ object FastAssets extends Controller {
    * This method appends a timestamp to the filename to cache it by the browser.
    */
   def at(file: String): String = {
-    Play.mode match {
-      case Mode.Prod => urlPath + "/" + file
-      case _ => {
-        val resourceName = Option(realPath + "/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
-        Play.resource(resourceName) match {
-          case Some(x) => urlPath + "/" + file.replaceFirst("\\.([^.]+)$", "_" + lastModifiedForTimestamp(x).get + ".$1")
-          case None    => urlPath + "/" + file
+    try {
+      Play.mode match {
+        case Mode.Prod => urlPath + "/" + file
+        case _ => {
+          val resourceName = Option(realPath + "/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
+          Play.resource(resourceName) match {
+            case Some(x) => urlPath + "/" + file.replaceFirst("\\.([^.]+)$", "_" + lastModifiedForTimestamp(x).get + ".$1")
+            case None    => urlPath + "/" + file
+          }
         }
       }
+    } catch {
+      case ex: Exception => "/assets/" + file
     }
   }
   
@@ -95,7 +99,6 @@ object FastAssets extends Controller {
   /**
    * Generates an `Action` that serves a static resource.
    *
-   * @param path the root folder for searching the static resource files, such as `"/public"`
    * @param file the file part extracted from the URL
    */
   def get(file: String): Action[AnyContent] = Action { request =>
