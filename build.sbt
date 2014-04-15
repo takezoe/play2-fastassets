@@ -2,16 +2,16 @@ name := "play2-fastassets"
 
 organization := "jp.sf.amateras.play2.fastassets"
 
-version := "0.0.2"
+version := "0.0.4"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.10.4"
 
 resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
 
 resolvers += "Typsafe releases" at "http://repo.typesafe.com/typesafe/releases/"
 
 libraryDependencies ++= Seq(
-  "play" %% "play" % "2.0.1" % "provided->default"
+  "com.typesafe.play" %% "play" % "2.2.2" % "provided->default"
 )
 
 publishTo := Some(Resolver.ssh("amateras-repo-scp", "shell.sourceforge.jp", "/home/groups/a/am/amateras/htdocs/mvn/") withPermissions("0664")
