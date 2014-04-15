@@ -8,7 +8,7 @@ At first, add the following dependency into your ```project/Build.scala```:
 ```scala
 resolvers += "amateras-repo" at "http://amateras.sourceforge.jp/mvn/"
 
-libraryDependencies += "jp.sf.amateras.play2.fastassets" %% "play2-fastassets" % "0.0.2"
+libraryDependencies += "jp.sf.amateras.play2.fastassets" %% "play2-fastassets" % "0.0.3"
 ```
 
 Replace the routing to ```controllers.Assets.at``` by ```jp.sf.amateras.play2.fastassets.FastAssets.get``` in ```conf/routes```.
@@ -50,6 +50,10 @@ So the browser retrieves a new file from the server instead of the cached conten
 
 Release Notes
 --------
+### 0.0.3 - 16 Apr 2014
+
+* Update for play-2.2.2.
+
 ### 0.0.2 - 05 Jan 2014
 
 * Ignore Exception in ```FastAssets#at()``` for testing.

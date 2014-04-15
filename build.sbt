@@ -2,7 +2,7 @@ name := "play2-fastassets"
 
 organization := "jp.sf.amateras.play2.fastassets"
 
-version := "0.0.4"
+version := "0.0.3"
 
 scalaVersion := "2.10.4"
 
