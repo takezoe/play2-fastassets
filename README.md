@@ -24,6 +24,7 @@ And add following configurations into ```conf/application.conf```.
 ```shell
 fastassets.urlPath=/assets
 fastassets.realPath=/public
+fastassets.versioning=true
 ```
 
 Use ```FastAssets.at``` instead of ```routes.Assets.at``` in HTML templates.
@@ -50,6 +51,10 @@ So the browser retrieves a new file from the server instead of the cached conten
 
 Release Notes
 --------
+### 0.0.4 - Under development
+
+* Add `fastassets.versioning` configuration to enable asset versioning in production.
+
 ### 0.0.3 - 16 Apr 2014
 
 * Update for play-2.2.2.

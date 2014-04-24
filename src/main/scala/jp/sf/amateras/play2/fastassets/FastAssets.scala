@@ -51,6 +51,8 @@ class AssetsBuilder extends Controller {
 
   private val parsableTimezoneCode = " " + timeZoneCode
 
+  private lazy val versioning = Play.configuration.getBoolean("fastassets.versioning").getOrElse(false)
+
   private lazy val defaultCharSet = Play.configuration.getString("default.charset").getOrElse("utf-8")
 
   private def addCharsetIfNeeded(mimeType: String): String =
@@ -65,7 +67,7 @@ class AssetsBuilder extends Controller {
   def at(file: String): String = {
     try {
       Play.mode match {
-        case Mode.Prod => urlPath + "/" + file
+        case Mode.Prod if(versioning == false) => urlPath + "/" + file
         case _ => {
           val resourceName = Option(realPath + "/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
           Play.resource(resourceName) match {
