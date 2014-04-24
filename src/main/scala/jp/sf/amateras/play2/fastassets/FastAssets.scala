@@ -71,7 +71,7 @@ class AssetsBuilder extends Controller {
         case _ => {
           val resourceName = Option(realPath + "/" + file).map(name => if (name.startsWith("/")) name else ("/" + name)).get
           Play.resource(resourceName) match {
-            case Some(x) => urlPath + "/" + file.replaceFirst("\\.([^.]+)$", "_" + lastModifiedFor(x).map(_.replaceAll("[, :a-zA-Z]", "")).get + ".$1")
+            case Some(x) => urlPath + "/" + file + lastModifiedFor(x).map("?" + _.replaceAll("[, :a-zA-Z]", "")).getOrElse("")
             case None    => urlPath + "/" + file
           }
         }
@@ -95,7 +95,7 @@ class AssetsBuilder extends Controller {
       case NonFatal(_) => None
     }
 
-    resourceNameAt(realPath, file.replaceFirst("""_[0-9]{12}\.""", ".")).map { resourceName =>
+    resourceNameAt(realPath, file.replaceFirst("""\?[0-9]{12}$""", ".")).map { resourceName =>
 
       val gzippedResource = Play.resource(resourceName + ".gz")
 
