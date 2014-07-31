@@ -51,6 +51,10 @@ So the browser retrieves a new file from the server instead of the cached conten
 
 Release Notes
 --------
+### 0.0.5 - 1 Aug 2014
+
+* Update for Play 2.3 / Scala 2.11
+
 ### 0.0.4 - 24 Apr 2014
 
 * Add `fastassets.versioning` configuration to enable asset versioning in production.
