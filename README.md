@@ -51,7 +51,7 @@ So the browser retrieves a new file from the server instead of the cached conten
 
 Release Notes
 --------
-### 0.0.5 - xx Aug 2014
+### 0.1.0 - 3 Aug 2014
 
 * Update for Play 2.3 / Scala 2.11
 
